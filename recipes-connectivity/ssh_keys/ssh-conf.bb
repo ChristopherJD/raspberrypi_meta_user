@@ -13,8 +13,9 @@ LICENSE = "CLOSED"
 LIC_FILES_CHKSUM = ""
 
 # No information for SRC_URI yet (only an external source tree was specified)
-SRC_URI = "file://id_rsa"
+SRC_URI = "file://id_rsa.pub"
 PROVIDES = "ssh-conf"
+FILES_${PN} += "/home/root/.ssh/*"
 
 # NOTE: no Makefile found, unable to determine what needs to be done
 
@@ -31,7 +32,6 @@ do_compile () {
 do_install () {
 	# Specify install commands here
 	#
-	install -d ${D}/home/root/.ssh
-	install -c -m 0644 ${WORKDIR}/id_rsa.pub ${D}/home/root/.ssh/id_rsa.pub
+	install -D ${WORKDIR}/id_rsa.pub ${D}/${ROOT_HOME}/.ssh/id_rsa.pub
 }
 

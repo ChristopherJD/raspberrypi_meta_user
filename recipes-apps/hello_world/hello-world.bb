@@ -12,7 +12,9 @@
 LICENSE = "CLOSED"
 LIC_FILES_CHKSUM = ""
 FILESEXTRAPATHS_append := ":${THISDIR}/hello_world"
-PROVIDES = "hello_world"
+PROVIDES = "hello-world"
+
+FILES_${PN} += "${bindir}"
 
 # No information for SRC_URI yet (only an external source tree was specified)
 SRC_URI = "file://AUTHORS \
@@ -31,7 +33,7 @@ SRC_URI = "file://AUTHORS \
 
 do_configure () {
 	cd ${WORKDIR}
-	sh autogen.sh --host ${TARGET_SYS}
+	sh autogen.sh --host ${TARGET_SYS} --prefix ${D}
 }
 
 do_compile () {
@@ -41,6 +43,7 @@ do_compile () {
 
 do_install () {
 	install -d ${D}${bindir}
-	install -c -m 0644 ${WORKDIR}/src/hello_world ${D}${bindir}
+	cd ${WORKDIR}
+	make install
 }
 
