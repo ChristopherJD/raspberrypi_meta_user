@@ -1,1 +1,27 @@
+# Common ignores
+*.o
+
+# Hello World Project ignores
 recipes-apps/hello_world/RemoteSystemsTempFiles/
+recipes-apps/hello_world/hello_world/Makefile
+recipes-apps/hello_world/hello_world/Makefile.in
+recipes-apps/hello_world/hello_world/aclocal.m4
+recipes-apps/hello_world/hello_world/arm-poky-linux-gnueabi-libtool
+recipes-apps/hello_world/hello_world/autom4te.cache/
+recipes-apps/hello_world/hello_world/compile
+recipes-apps/hello_world/hello_world/config.guess
+recipes-apps/hello_world/hello_world/config.h
+recipes-apps/hello_world/hello_world/config.h.in
+recipes-apps/hello_world/hello_world/config.log
+recipes-apps/hello_world/hello_world/config.status
+recipes-apps/hello_world/hello_world/config.sub
+recipes-apps/hello_world/hello_world/configure
+recipes-apps/hello_world/hello_world/depcomp
+recipes-apps/hello_world/hello_world/install-sh
+recipes-apps/hello_world/hello_world/ltmain.sh
+recipes-apps/hello_world/hello_world/missing
+recipes-apps/hello_world/hello_world/src/.deps/
+recipes-apps/hello_world/hello_world/src/Makefile
+recipes-apps/hello_world/hello_world/src/Makefile.in
+recipes-apps/hello_world/hello_world/src/hello_world
+recipes-apps/hello_world/hello_world/stamp-h1
