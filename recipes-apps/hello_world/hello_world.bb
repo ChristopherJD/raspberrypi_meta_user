@@ -11,27 +11,36 @@
 # recipe for anything other than initial testing/development!
 LICENSE = "CLOSED"
 LIC_FILES_CHKSUM = ""
+FILESEXTRAPATHS_append := ":${THISDIR}/hello_world"
+PROVIDES = "hello_world"
 
 # No information for SRC_URI yet (only an external source tree was specified)
-SRC_URI = "file://20-wired.network"
-PROVIDES = "network-conf"
+SRC_URI = "file://AUTHORS \
+		file://autogen.sh \
+		file://ChangeLog \
+		file://configure.ac \
+		file://COPYING \
+		file://INSTALL \
+		file://Makefile.am \
+		file://NEWS \
+		file://README \
+		file://src/hello_world.c \
+		file://src/Makefile.am"
 
 # NOTE: no Makefile found, unable to determine what needs to be done
 
 do_configure () {
-	# Specify any needed configure commands here
-	:
+	cd ${WORKDIR}
+	sh autogen.sh --host ${TARGET_SYS}
 }
 
 do_compile () {
-	# Specify compilation commands here
-	:
+	cd ${WORKDIR}
+	make all
 }
 
 do_install () {
-	# Specify install commands here
-	#
-	install -d ${D}${sysconfdir}/systemd/network
-	install -c -m 0644 ${WORKDIR}/20-wired.network ${D}${sysconfdir}/systemd/network
+	install -d ${D}${bindir}
+	install -c -m 0644 ${WORKDIR}/src/hello_world ${D}${bindir}
 }
 

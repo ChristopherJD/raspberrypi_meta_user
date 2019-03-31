@@ -25,3 +25,4 @@ recipes-apps/hello_world/hello_world/src/Makefile
 recipes-apps/hello_world/hello_world/src/Makefile.in
 recipes-apps/hello_world/hello_world/src/hello_world
 recipes-apps/hello_world/hello_world/stamp-h1
+recipes-apps/hello_world/hello_world/libtool
