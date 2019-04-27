@@ -33,11 +33,11 @@
 #include <linux/types.h>
 #include <linux/spi/spidev.h>
 
-#define DEVICE "/dev/spidev0.0"
+#include "lsm9ds1.h"
 
 static uint8_t mode;
 static uint8_t bits = 8;
-static uint32_t speed = 15000000;
+static uint32_t speed = 15000000;	//TODO Why is this not the correct speed in MHZ? This about 9.09 MHZ
 static uint16_t delay = 0;
 
 static void pabort(const char *s) {
