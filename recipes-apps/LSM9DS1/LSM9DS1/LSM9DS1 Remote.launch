@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.cdt.launch.remoteApplicationLaunchType">
+    <booleanAttribute key="org.eclipse.cdt.dsf.gdb.AUTO_SOLIB" value="false"/>
+    <stringAttribute key="org.eclipse.cdt.dsf.gdb.DEBUG_NAME" value="/opt/poky/2.6.2/sysroots/x86_64-pokysdk-linux/usr/bin/arm-poky-linux-gnueabi/arm-poky-linux-gnueabi-gdb"/>
+    <stringAttribute key="org.eclipse.cdt.dsf.gdb.GDB_INIT" value="/home/christopher/Documents/poky/meta-user/recipes-apps/LSM9DS1/LSM9DS1/.gdbinit"/>
+    <intAttribute key="org.eclipse.cdt.launch.ATTR_BUILD_BEFORE_LAUNCH_ATTR" value="2"/>
+    <stringAttribute key="org.eclipse.cdt.launch.PROGRAM_NAME" value="src/LSM9DS1"/>
+    <stringAttribute key="org.eclipse.cdt.launch.PROJECT_ATTR" value="LSM9DS1"/>
+    <booleanAttribute key="org.eclipse.cdt.launch.PROJECT_BUILD_CONFIG_AUTO_ATTR" value="false"/>
+    <stringAttribute key="org.eclipse.cdt.launch.PROJECT_BUILD_CONFIG_ID_ATTR" value=""/>
+    <stringAttribute key="org.eclipse.debug.core.ATTR_PRERUN_CMDS" value="chmod a+x LSM9DS1"/>
+    <booleanAttribute key="org.eclipse.debug.core.ATTR_SKIP_DOWNLOAD_TO_TARGET" value="false"/>
+    <stringAttribute key="org.eclipse.debug.core.ATTR_TARGET_PATH" value="/home/root/LSM9DS1"/>
+    <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+        <listEntry value="/LSM9DS1"/>
+    </listAttribute>
+    <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+        <listEntry value="4"/>
+    </listAttribute>
+    <stringAttribute key="org.eclipse.debug.core.REMOTE_TCP" value="Remote Host"/>
+</launchConfiguration>

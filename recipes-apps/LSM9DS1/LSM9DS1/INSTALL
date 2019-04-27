@@ -6,4 +6,4 @@ Installing:
   $ sudo make install
 
 Running:
-  $ LSM9DS0
+  $ LSM9DS1
