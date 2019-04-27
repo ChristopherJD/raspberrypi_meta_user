@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configurations>
 <configuration id="org.eclipse.linuxtools.cdt.autotools.core.configuration.build.457673550">
-<option id="configure" value="CFLAGS=&quot; -g -O0  --sysroot=/opt/yocto_sdk/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi&quot; CXXFLAGS=&quot; -g -O0  --sysroot=/opt/yocto_sdk/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi&quot; LDFLAGS=&quot; --sysroot=/opt/yocto_sdk/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi&quot; CPPFLAGS=&quot; --sysroot=/opt/yocto_sdk/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi&quot; configure --with-libtool-sysroot=/opt/yocto_sdk/sysroots"/>
+<option id="configure" value="CFLAGS=&quot; -g -O0  --sysroot=/opt/poky/2.6.2/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi&quot; CXXFLAGS=&quot; -g -O0  --sysroot=/opt/poky/2.6.2/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi&quot; LDFLAGS=&quot; --sysroot=/opt/poky/2.6.2/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi&quot; CPPFLAGS=&quot; --sysroot=/opt/poky/2.6.2/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi&quot; configure --with-libtool-sysroot=/opt/poky/2.6.2/sysroots"/>
 <option id="configdir" value=""/>
 <option id="cache-file" value=""/>
 <option id="help" value="false"/>
@@ -37,7 +37,7 @@
 <flagvalue id="cflags-gcov" value="false"/>
 </flag>
 <option id="user" value=""/>
-<option id="autogen" value="CFLAGS=&quot; -g -O0  --sysroot=/opt/yocto_sdk/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi&quot; CXXFLAGS=&quot; -g -O0  --sysroot=/opt/yocto_sdk/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi&quot; LDFLAGS=&quot; --sysroot=/opt/yocto_sdk/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi&quot; CPPFLAGS=&quot; --sysroot=/opt/yocto_sdk/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi&quot; autogen.sh --with-libtool-sysroot=/opt/yocto_sdk/sysroots"/>
-<option id="autogenOpts" value="--target=arm-poky-linux-gnueabi --host=arm-poky-linux-gnueabi --build=x86_64-linux --with-libtool-sysroot=/opt/yocto_sdk/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi"/>
+<option id="autogen" value="CFLAGS=&quot; -g -O0  --sysroot=/opt/poky/2.6.2/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi&quot; CXXFLAGS=&quot; -g -O0  --sysroot=/opt/poky/2.6.2/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi&quot; LDFLAGS=&quot; --sysroot=/opt/poky/2.6.2/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi&quot; CPPFLAGS=&quot; --sysroot=/opt/poky/2.6.2/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi&quot; autogen.sh --with-libtool-sysroot=/opt/poky/2.6.2/sysroots"/>
+<option id="autogenOpts" value="--target=arm-poky-linux-gnueabi --host=arm-poky-linux-gnueabi --build=x86_64-linux --with-libtool-sysroot=/opt/poky/2.6.2/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi"/>
 </configuration>
 </configurations>

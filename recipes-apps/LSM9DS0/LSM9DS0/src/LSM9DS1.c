@@ -37,8 +37,8 @@
 
 static uint8_t mode;
 static uint8_t bits = 8;
-static uint32_t speed = 10000000;
-static uint16_t delay;
+static uint32_t speed = 15000000;
+static uint16_t delay = 0;
 
 static void pabort(const char *s) {
 	perror(s);
@@ -49,19 +49,27 @@ static void transfer(int fd)
 {
 	int ret;
 	uint8_t tx[] = {
-		0x0F
+		0x80 | 0xF,
 	};
 	uint8_t rx[sizeof(tx)] = {0, };
-	struct spi_ioc_transfer tr = {
-		.tx_buf = (unsigned long)tx,
-		.rx_buf = (unsigned long)rx,
-		.len = sizeof(tx),
-		.delay_usecs = delay,
-		.speed_hz = speed,
-		.bits_per_word = bits,
+	struct spi_ioc_transfer tr[2] = {
+		{
+			.tx_buf = (unsigned long)tx,
+			.len = sizeof(tx),
+			.delay_usecs = delay,
+			.speed_hz = speed,
+			.bits_per_word = bits,
+		},
+		{
+			.rx_buf = (unsigned long)rx,
+			.len = sizeof(rx),
+			.delay_usecs = delay,
+			.speed_hz = speed,
+			.bits_per_word = bits,
+		}
 	};
 
-	ret = ioctl(fd, SPI_IOC_MESSAGE(1), &tr);
+	ret = ioctl(fd, SPI_IOC_MESSAGE(2), tr);
 	if (ret < 1)
 		pabort("can't send spi message");
 
@@ -81,6 +89,8 @@ int main(void) {
 	if (fd < 0) {
 		pabort("can't open device");
 	}
+
+	mode |= SPI_CPOL | SPI_CPHA;	//Mode 3
 
 	/*
 	 * spi mode

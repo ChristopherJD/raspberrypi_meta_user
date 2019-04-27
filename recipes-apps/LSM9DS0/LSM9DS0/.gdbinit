@@ -1,1 +1,1 @@
-set sysroot /opt/yocto_sdk/sysroots
+set sysroot /opt/poky/2.6.2/sysroots
