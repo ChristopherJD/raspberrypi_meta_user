@@ -30,13 +30,13 @@ int main(void) {
 
 	lsm9ds1_error_t ret = LSM9DS1_UNKNOWN_ERROR;	// Function return codes
 
-	ret = lsm9ds0_init(LSM9DS1_SPI_BUS);
+	ret = lsm9ds1_init(LSM9DS1_SPI_BUS);
 	if(ret < 0) {
 		return ret;
 	}
 
 	uint8_t read_buffer = 0;
-	lsm9ds0_read(0xF, &read_buffer);
+	lsm9ds1_read(0xF, &read_buffer);
 
 	printf("0x%x\n", read_buffer);
 

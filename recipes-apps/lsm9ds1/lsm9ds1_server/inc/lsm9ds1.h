@@ -28,7 +28,7 @@ typedef enum lsm9ds1_bus_t {
 	LSM9DS1_I2C_BUS,
 }lsm9ds1_bus_t;
 
-lsm9ds1_error_t lsm9ds0_read(uint8_t register_addr, uint8_t *rx);
-lsm9ds1_error_t lsm9ds0_init(lsm9ds1_bus_t bus_type);
+lsm9ds1_error_t lsm9ds1_read(uint8_t register_addr, uint8_t *rx);
+lsm9ds1_error_t lsm9ds1_init(lsm9ds1_bus_t bus_type);
 
 #endif /* LSM9DS1_H_ */

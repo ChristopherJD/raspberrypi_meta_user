@@ -115,7 +115,7 @@ static lsm9ds1_error_t init_i2c(void) {
 	return LSM9DS1_BUS_NOT_SUPPORTED;
 }
 
-lsm9ds1_error_t lsm9ds0_read(uint8_t register_addr, uint8_t *rx) {
+lsm9ds1_error_t lsm9ds1_read(uint8_t register_addr, uint8_t *rx) {
 
 	lsm9ds1_error_t ret = LSM9DS1_UNKNOWN_ERROR;
 	uint8_t tx = 0x80 | register_addr;
@@ -123,7 +123,7 @@ lsm9ds1_error_t lsm9ds0_read(uint8_t register_addr, uint8_t *rx) {
 	return ret;
 }
 
-lsm9ds1_error_t lsm9ds0_init(lsm9ds1_bus_t bus_type) {
+lsm9ds1_error_t lsm9ds1_init(lsm9ds1_bus_t bus_type) {
 
 	// If we have already opened the fd then return early
 	if(fd >= 0) {
