@@ -52,27 +52,6 @@ recipes-apps/spi_loop_back/spidev_test/src/spidev_test
 recipes-apps/spi_loop_back/spidev_test/stamp-h1
 
 # LSM9DS0 Project ignores
-recipes-apps/LSM9DS1/LSM9DS1/Makefile
-recipes-apps/LSM9DS1/LSM9DS1/Makefile.in
-recipes-apps/LSM9DS1/LSM9DS1/aclocal.m4
-recipes-apps/LSM9DS1/LSM9DS1/arm-poky-linux-gnueabi-libtool
-recipes-apps/LSM9DS1/LSM9DS1/autom4te.cache/
-recipes-apps/LSM9DS1/LSM9DS1/compile
-recipes-apps/LSM9DS1/LSM9DS1/config.guess
-recipes-apps/LSM9DS1/LSM9DS1/config.h
-recipes-apps/LSM9DS1/LSM9DS1/config.h.in
-recipes-apps/LSM9DS1/LSM9DS1/config.log
-recipes-apps/LSM9DS1/LSM9DS1/config.status
-recipes-apps/LSM9DS1/LSM9DS1/config.sub
-recipes-apps/LSM9DS1/LSM9DS1/configure
-recipes-apps/LSM9DS1/LSM9DS1/depcomp
-recipes-apps/LSM9DS1/LSM9DS1/install-sh
-recipes-apps/LSM9DS1/LSM9DS1/ltmain.sh
-recipes-apps/LSM9DS1/LSM9DS1/missing
-recipes-apps/LSM9DS1/LSM9DS1/src/.deps/
-recipes-apps/LSM9DS1/LSM9DS1/src/Makefile
-recipes-apps/LSM9DS1/LSM9DS1/src/Makefile.in
-recipes-apps/LSM9DS1/LSM9DS1/src/spidev_test
-recipes-apps/LSM9DS1/LSM9DS1/stamp-h1
-recipes-apps/LSM9DS1/LSM9DS1/src/LSM9DS1
+recipes-apps/lsm9ds1/lsm9ds1_server/Debug/
+recipes-apps/lsm9ds1/lsm9ds1_server/toolchain.cmake
 
