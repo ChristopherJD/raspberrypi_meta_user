@@ -7,16 +7,18 @@ SET(LICENSE "MIT")
 ######## Build and include settings ########
 include_directories(
 	inc
+	../lsm9ds1/inc
 )
+
+#For the shared library:
+set ( PROJECT_LINK_LIBS liblsm9ds1.so )
 
 link_directories(
 	${LINK_DIRECTORIES}
+	"../lsm9ds1/Debug"
 )
 
-file(GLOB_RECURSE SOURCES src/*.cpp)
-file(GLOB_RECURSE SOURCES src/*.c)
 file(GLOB SOURCES
-	"src/*.c"
 	"src/*.cpp"
 )
 
@@ -28,6 +30,7 @@ add_executable(
 
 TARGET_LINK_LIBRARIES(
 	lsm9ds1_server
+	${PROJECT_LINK_LIBS}
 )
 
 ######## Install targets ########

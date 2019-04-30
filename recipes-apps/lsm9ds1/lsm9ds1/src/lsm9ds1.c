@@ -43,22 +43,19 @@ static lsm9ds1_error_t transfer(uint8_t tx, uint8_t *rx)
 {
 	int8_t ret;
 
-	struct spi_ioc_transfer tr[2] = {
-		{
-			.tx_buf = (unsigned long)&tx,
-			.len = sizeof(tx),
-			.delay_usecs = delay,
-			.speed_hz = speed,
-			.bits_per_word = bits,
-		},
-		{
-			.rx_buf = (unsigned long)rx,
-			.len = sizeof(rx),
-			.delay_usecs = delay,
-			.speed_hz = speed,
-			.bits_per_word = bits,
-		}
-	};
+	struct spi_ioc_transfer tr[2] = {0};
+
+	tr[0].tx_buf = (unsigned long)&tx;
+	tr[0].len = sizeof(tx);
+	tr[0].speed_hz = speed;
+	tr[0].delay_usecs = delay;
+	tr[0].bits_per_word = bits;
+
+	tr[1].tx_buf = (unsigned long)rx;
+	tr[1].len = sizeof(rx);
+	tr[1].speed_hz = speed;
+	tr[1].delay_usecs = delay;
+	tr[1].bits_per_word = bits;
 
 	ret = ioctl(fd, SPI_IOC_MESSAGE(2), tr);
 

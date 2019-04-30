@@ -8,6 +8,11 @@
 #ifndef LSM9DS1_H_
 #define LSM9DS1_H_
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
 #include <stdint.h>
 
 #define DEVICE "/dev/spidev0.0"
@@ -30,5 +35,9 @@ typedef enum lsm9ds1_bus_t {
 
 lsm9ds1_error_t lsm9ds1_read(uint8_t register_addr, uint8_t *rx);
 lsm9ds1_error_t lsm9ds1_init(lsm9ds1_bus_t bus_type);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* LSM9DS1_H_ */
