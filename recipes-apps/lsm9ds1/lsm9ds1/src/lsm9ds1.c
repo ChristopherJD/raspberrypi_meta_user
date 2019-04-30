@@ -23,6 +23,8 @@
  * THE SOFTWARE.
  */
 
+//TODO Add doxygen comments.
+
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -39,10 +41,11 @@ static uint32_t speed = 15000000;
 static uint16_t delay = 0;
 static int32_t fd = -1;	// File descriptor for LSM9DS0
 
-static lsm9ds1_error_t transfer(uint8_t tx, uint8_t *rx)
+static lsm9ds1_status_t transfer(uint8_t tx, uint8_t *rx)
 {
 	int8_t ret;
 
+	//TODO ensure sizes are correct
 	struct spi_ioc_transfer tr[2] = {0};
 
 	tr[0].tx_buf = (unsigned long)&tx;
@@ -63,10 +66,11 @@ static lsm9ds1_error_t transfer(uint8_t tx, uint8_t *rx)
 		return LSM9DS1_SPI_BUS_XFER_ERROR;
 	}
 
-	return 0;
+	return LSM9DS1_SUCCESS;
 }
 
-static lsm9ds1_error_t get_spi_mode() {
+//TODO Decide if function is necessary
+static lsm9ds1_status_t get_spi_mode() {
 
 	int8_t ret = -1;	// Function return codes.
 
@@ -75,10 +79,10 @@ static lsm9ds1_error_t get_spi_mode() {
 		return LSM9DS1_UNABLE_TO_GET_SPI_MODE;
 	}
 
-	return 0;
+	return LSM9DS1_SUCCESS;
 }
 
-static lsm9ds1_error_t init_spi(void) {
+static lsm9ds1_status_t init_spi(void) {
 
 	int8_t ret = -1;	// Function return codes.
 
@@ -105,26 +109,35 @@ static lsm9ds1_error_t init_spi(void) {
 	if (ret == -1) {
 		return LSM9DS1_CLOCK_NOT_SET;
 	}
+
+	return LSM9DS1_SUCCESS;
 }
 
-static lsm9ds1_error_t init_i2c(void) {
+static lsm9ds1_status_t init_i2c(void) {
 	// Probably won't implement for raspberrypi
 	return LSM9DS1_BUS_NOT_SUPPORTED;
 }
 
-lsm9ds1_error_t lsm9ds1_read(uint8_t register_addr, uint8_t *rx) {
+lsm9ds1_status_t lsm9ds1_read(uint8_t register_addr, uint8_t *rx) {
 
-	lsm9ds1_error_t ret = LSM9DS1_UNKNOWN_ERROR;
-	uint8_t tx = 0x80 | register_addr;
+	lsm9ds1_status_t ret = LSM9DS1_UNKNOWN_ERROR;
+	uint8_t tx = (SPI_READ | register_addr);
 	ret = transfer(tx, rx);
 	return ret;
 }
 
-lsm9ds1_error_t lsm9ds1_init(lsm9ds1_bus_t bus_type) {
+lsm9ds1_status_t lsm9ds1_init(lsm9ds1_bus_t bus_type) {
 
+	static num_calls = 0;
+
+	if(num_calls > 0) {
+		return LSM9DS1_SUCCESS;
+	}
+
+	//TODO decide if we need to remove
 	// If we have already opened the fd then return early
 	if(fd >= 0) {
-		return 0;
+		return LSM9DS1_SUCCESS;
 	}
 
 	// Determine bus type being used.

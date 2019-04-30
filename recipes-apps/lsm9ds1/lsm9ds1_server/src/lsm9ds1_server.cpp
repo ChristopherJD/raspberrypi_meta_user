@@ -28,7 +28,7 @@
 
 int main(void) {
 
-	lsm9ds1_error_t ret = LSM9DS1_UNKNOWN_ERROR;	// Function return codes
+	lsm9ds1_status_t ret = LSM9DS1_UNKNOWN_ERROR;	// Function return codes
 
 	ret = lsm9ds1_init(LSM9DS1_SPI_BUS);
 	if(ret < 0) {
