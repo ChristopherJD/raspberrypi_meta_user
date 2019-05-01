@@ -24,6 +24,9 @@
  */
 
 #include <stdio.h>
+#include <iostream>
+#include <boost/array.hpp>
+#include <boost/asio.hpp>
 #include "lsm9ds1.h"
 
 int main(void) {

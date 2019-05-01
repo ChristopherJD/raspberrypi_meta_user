@@ -12,6 +12,8 @@ include_directories(
 
 #For the shared library:
 set ( PROJECT_LINK_LIBS liblsm9ds1.so )
+###SET(GCC_COVERAGE_LINK_FLAGS "-Wl")
+###SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${GCC_COVERAGE_LINK_FLAGS}")
 
 link_directories(
 	${LINK_DIRECTORIES}
@@ -30,6 +32,9 @@ add_executable(
 
 TARGET_LINK_LIBRARIES(
 	lsm9ds1_server
+	boost_system
+	boost_thread
+	pthread
 	${PROJECT_LINK_LIBS}
 )
 
