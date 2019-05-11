@@ -23,77 +23,122 @@
  * THE SOFTWARE.
  */
 
-#include <cstdlib>
+#include <cstdio>
 #include <iostream>
+#include <boost/array.hpp>
 #include <boost/bind.hpp>
-#include <boost/smart_ptr.hpp>
+#include <boost/enable_shared_from_this.hpp>
+#include <boost/shared_ptr.hpp>
 #include <boost/asio.hpp>
-#include <boost/thread.hpp>
 #include <lsm9ds1.h>
 
-using boost::asio::ip::tcp;
+#if defined(BOOST_ASIO_HAS_LOCAL_SOCKETS)
 
-const int max_length = 1024;
+using boost::asio::local::stream_protocol;
 
-typedef boost::shared_ptr<tcp::socket> socket_ptr;
-
-void session(socket_ptr sock) {
-	try {
-#ifdef DEBUG
-		std::cout << "Handling read request..." << std::endl;
-#endif
-		uint8_t read_buffer = 0;
-		lsm9ds1_read(0xF, &read_buffer);
-#ifdef DEBUG
-		std::cout << (uint32_t) read_buffer << std::endl;
-#endif
-
-		boost::asio::write(*sock,
-				boost::asio::buffer(&read_buffer, sizeof(read_buffer)));
-	} catch (std::exception& e) {
-		std::cerr << "Exception in thread: " << e.what() << "\n";
+class session: public boost::enable_shared_from_this<session> {
+public:
+	session(boost::asio::io_service& io_service) :
+			socket_(io_service) {
 	}
-}
 
-void server(boost::asio::io_service& io_service, short port) {
-	tcp::acceptor a(io_service, tcp::endpoint(tcp::v4(), port));
-	for (;;) {
-		socket_ptr sock(new tcp::socket(io_service));
-		a.accept(*sock);
-		boost::thread t(boost::bind(session, sock));
+	stream_protocol::socket& socket() {
+		return socket_;
 	}
-}
+
+	void start() {
+		socket_.async_read_some(boost::asio::buffer(data_),
+				boost::bind(&session::handle_read, shared_from_this(),
+						boost::asio::placeholders::error,
+						boost::asio::placeholders::bytes_transferred));
+	}
+
+	void handle_read(const boost::system::error_code& error,
+			size_t bytes_transferred) {
+		if (!error) {
+			std::cout << "handle read" << std::endl;
+			int8_t ret = -1;
+			uint8_t read_buffer = 0;
+			ret = lsm9ds1_read(0x0F, &read_buffer);
+			boost::asio::async_write(socket_,
+					boost::asio::buffer(&read_buffer, sizeof(read_buffer)),
+					boost::bind(&session::handle_write, shared_from_this(),
+							boost::asio::placeholders::error));
+		}
+	}
+
+	void handle_write(const boost::system::error_code& error) {
+		if (!error) {
+			std::cout << "handle write" << std::endl;
+			std::string buffer = "0x0F";
+			socket_.async_read_some(boost::asio::buffer(buffer),
+					boost::bind(&session::handle_read, shared_from_this(),
+							boost::asio::placeholders::error,
+							boost::asio::placeholders::bytes_transferred));
+		}
+	}
+
+private:
+	// The socket used to communicate with the client.
+	stream_protocol::socket socket_;
+
+	// Buffer used to store data received from the client.
+	boost::array<char, 1024> data_;
+};
+
+typedef boost::shared_ptr<session> session_ptr;
+
+class server {
+public:
+	server(boost::asio::io_service& io_service, const std::string& file) :
+			io_service_(io_service), acceptor_(io_service,
+					stream_protocol::endpoint(file)) {
+		session_ptr new_session(new session(io_service_));
+		acceptor_.async_accept(new_session->socket(),
+				boost::bind(&server::handle_accept, this, new_session,
+						boost::asio::placeholders::error));
+	}
+
+	void handle_accept(session_ptr new_session,
+			const boost::system::error_code& error) {
+		if (!error) {
+			new_session->start();
+			new_session.reset(new session(io_service_));
+			acceptor_.async_accept(new_session->socket(),
+					boost::bind(&server::handle_accept, this, new_session,
+							boost::asio::placeholders::error));
+		}
+	}
+
+private:
+	boost::asio::io_service& io_service_;
+	stream_protocol::acceptor acceptor_;
+};
 
 int main(int argc, char* argv[]) {
 	try {
-		int8_t ret = -1;
 		if (argc != 2) {
-			std::cerr << "Usage: blocking_tcp_echo_server <port>\n";
+			std::cerr << "Usage: stream_server <file>\n";
+			std::cerr << "*** WARNING: existing file is removed ***\n";
 			return 1;
 		}
 
-#ifdef DEBUG
-		std::cout << "Starting lsm9ds1_server..." << std::endl;
-		std::cout << "lsm9ds1 init..." << std::endl;
-#endif
-
+		int8_t ret = -1;
 		ret = lsm9ds1_init(LSM9DS1_SPI_BUS);
-		if (ret < 0) {
-			return ret;
-		}
-#ifdef DEBUG
-		std::cout << "lsm9ds1 init: SUCCESS" << std::endl;
-#endif
 
 		boost::asio::io_service io_service;
 
-#ifdef DEBUG
-		std::cout << "Waiting on clients..." << std::endl;
-#endif
-		server(io_service, atoi(argv[1]));
+		std::remove(argv[1]);
+		server s(io_service, argv[1]);
+
+		io_service.run();
 	} catch (std::exception& e) {
 		std::cerr << "Exception: " << e.what() << "\n";
 	}
 
 	return 0;
 }
+
+#else // defined(BOOST_ASIO_HAS_LOCAL_SOCKETS)
+# error Local sockets not available on this platform.
+#endif // defined(BOOST_ASIO_HAS_LOCAL_SOCKETS)
