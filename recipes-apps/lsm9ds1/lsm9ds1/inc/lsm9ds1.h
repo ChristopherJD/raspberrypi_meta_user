@@ -38,6 +38,20 @@ extern "C"
 #define SPI_READ 0x80
 #define SPI_WRITE 0x0
 
+typedef int16_t lsm9ds1_temperature_t;
+
+typedef struct accelerometer_data {
+	int16_t x;
+	int16_t y;
+	int16_t z;
+}accelerometer_data_t;
+
+typedef struct mag_data {
+	int16_t x;
+	int16_t y;
+	int16_t z;
+}mag_data_t;
+
 typedef enum lsm9ds1_status {
 	LSM9DS1_SUCCESS = 0,
 	LSM9DS1_NOT_FOUND = -1,
@@ -49,11 +63,29 @@ typedef enum lsm9ds1_status {
 	LSM9DS1_BUS_NOT_SUPPORTED = -7,
 	LSM9DS1_UNKNOWN_ERROR = -8,
 	LSM9DS1_ALREADY_INIT_ERROR = -9,
+	LSM9DS1_UNKNOWN_SUB_DEVICE = -10,
+	LSM9DS1_NOT_INITIALIZED = -11,
+	LSM9DS1_UNSUPPORTED_OP = -12,
+	LSM9DS1_UKNOWN_ACCEL_RANGE = -13,
+	LSM9DS1_BUS_NOT_INTIALIZED = -14,
+	LSM9DS1_UKNOWN_GAIN_RANGE = -15,
 } lsm9ds1_status_t;
+
+typedef enum {
+	LSM9DS1_READ, LSM9DS1_WRITE,
+} lsm9ds1_xfer_t;
 
 typedef enum lsm9ds1_bus_t {
 	LSM9DS1_SPI_BUS, LSM9DS1_I2C_BUS,
 } lsm9ds1_bus_t;
+
+typedef enum {
+	LSM9DS1_UNKNOWN_DEVICE = 0,
+	LSM9DS1_ACCEL_GYRO = 0b01101000,
+	LSM9DS1_MAG = 0b00111101,
+} lsm9ds1_devices_t;
+
+#define LSM9DS1_REGISTER_WHO_AM_I 0x0FU
 
 typedef enum {
 	LSM9DS1_REGISTER_WHO_AM_I_XG = 0x0F,
@@ -148,8 +180,51 @@ typedef enum {
 	LSM9DS1_GYROSCALE_2000DPS = (0b11 << 3) // +/- 2000 degrees per second rotation
 } lsm9ds1GyroScale_t;
 
-lsm9ds1_status_t lsm9ds1_read(uint8_t register_addr, uint8_t *rx);
-lsm9ds1_status_t lsm9ds1_init(lsm9ds1_bus_t bus_type);
+typedef struct lsm9ds1_settings {
+	lsm9ds1AccelRange_t range;
+	lsm9ds1MagGain_t gain;
+}lsm9ds1_settings_t;
+
+//TODO Make better header comments.
+/** @brief Determine which subdevice of the LSM9DS1 we are reading from. This can either be the gyroscope and accelerometer combo or a magnetometer.
+ *  @param device_id The discovered device id. This is the value returned from the WHOAMI register.
+ *  @return status
+ */
+lsm9ds1_status_t lsm9ds1_read_sub_device(lsm9ds1_devices_t *device_id);
+
+/** @brief Read the accelerometer in the coordinates x,y,z.
+ *  @param accel_data The values read from the accelerometer.
+ *  @return status
+ */
+lsm9ds1_status_t lsm9ds1_read_accel(accelerometer_data_t *accel_data);
+
+/** @brief Read the temperature.
+ *  @param temp The temperature read.
+ *  @return status
+ */
+lsm9ds1_status_t lsm9ds1_read_temp(lsm9ds1_temperature_t *temp);
+
+/** @brief Read the magnetometer in the coordinates x,y,z.
+ *  @param mag_data The values read from the magnetometer.
+ *  @return status
+ */
+lsm9ds1_status_t lsm9ds1_read_mag(mag_data_t *mag_data);
+
+/** @brief Initialize the lsm9ds1 in either SPI or I2C. Currently only SPI is supported.
+ *  @param bus_type Either I2C or SPI.
+ *  @param range The accelerometer range.
+ *  @return status
+ */
+lsm9ds1_status_t lsm9ds1_init(lsm9ds1_bus_t bus_type, lsm9ds1AccelRange_t range, lsm9ds1MagGain_t gain);
+
+/** @brief Setup the accelerometer.
+ *  @param range The accelerometer range.
+ *  @return status
+ */
+lsm9ds1_status_t lsm9ds1_setup_accel(lsm9ds1AccelRange_t range);
+
+lsm9ds1_status_t lsm9ds1_setup_mag(lsm9ds1MagGain_t gain);
+
 
 #ifdef __cplusplus
 }

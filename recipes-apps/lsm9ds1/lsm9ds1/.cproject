@@ -57,11 +57,7 @@
                                 								
                                 <option defaultValue="gnu.c.debugging.level.max" id="gnu.c.compiler.option.debugging.level.1782276703" name="Debug Level" superClass="gnu.c.compiler.option.debugging.level" valueType="enumerated"/>
                                 								
-                                <option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.c.compiler.option.include.paths.794844363" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" valueType="includePath">
-                                    									
-                                    <listOptionValue builtIn="false" value="/home/christopher/Documents/poky/meta-user/recipes-apps/lsm9ds1/liblsm9ds1/inc"/>
-                                    								
-                                </option>
+                                <option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="true" id="gnu.c.compiler.option.include.paths.794844363" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" valueType="includePath"/>
                                 								
                                 <inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1453873666" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
                                 							
