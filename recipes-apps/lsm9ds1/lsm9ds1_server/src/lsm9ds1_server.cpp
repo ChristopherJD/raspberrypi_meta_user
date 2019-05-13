@@ -58,10 +58,11 @@ public:
 		if (!error) {
 			std::cout << "handle read" << std::endl;
 			int8_t ret = -1;
-			uint8_t read_buffer = 0;
-			ret = lsm9ds1_read(0x0F, &read_buffer);
+			accelerometer_data_t accelerometer_buffer = {0};
+			lsm9ds1_read_accel(&accelerometer_buffer);
+
 			boost::asio::async_write(socket_,
-					boost::asio::buffer(&read_buffer, sizeof(read_buffer)),
+					boost::asio::buffer(&accelerometer_buffer.x, 1),
 					boost::bind(&session::handle_write, shared_from_this(),
 							boost::asio::placeholders::error));
 		}
@@ -123,8 +124,9 @@ int main(int argc, char* argv[]) {
 			return 1;
 		}
 
-		int8_t ret = -1;
-		ret = lsm9ds1_init(LSM9DS1_SPI_BUS);
+		lsm9ds1_status_t ret = LSM9DS1_UNKNOWN_ERROR;
+		ret = lsm9ds1_init(LSM9DS1_SPI_BUS, LSM9DS1_ACCELRANGE_8G,
+				LSM9DS1_MAGGAIN_8GAUSS, LSM9DS1_GYROSCALE_500DPS);
 
 		boost::asio::io_service io_service;
 

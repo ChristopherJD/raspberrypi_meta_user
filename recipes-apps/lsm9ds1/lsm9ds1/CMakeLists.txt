@@ -4,6 +4,8 @@ cmake_minimum_required (VERSION 2.8.1)
 PROJECT(liblsm9ds1)
 SET(LICENSE "TBD")
 
+set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -DDEBUG")
+
 ######## Build and include settings ########
 include_directories(
 	inc

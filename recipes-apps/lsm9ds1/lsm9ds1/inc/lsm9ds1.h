@@ -142,7 +142,7 @@ typedef enum {
 	LSM9DS1_ACCELRANGE_16G = (0b01 << 3),
 	LSM9DS1_ACCELRANGE_4G = (0b10 << 3),
 	LSM9DS1_ACCELRANGE_8G = (0b11 << 3),
-} lsm9ds1AccelRange_t;
+} lsm9ds1_accel_range_t;
 
 typedef enum {
 	LSM9DS1_ACCELDATARATE_POWERDOWN = (0b0000 << 4),
@@ -163,7 +163,7 @@ typedef enum {
 	LSM9DS1_MAGGAIN_8GAUSS = (0b01 << 5),  // +/- 8 gauss
 	LSM9DS1_MAGGAIN_12GAUSS = (0b10 << 5),  // +/- 12 gauss
 	LSM9DS1_MAGGAIN_16GAUSS = (0b11 << 5)   // +/- 16 gauss
-} lsm9ds1MagGain_t;
+} lsm9ds1_mag_gain_t;
 
 typedef enum {
 	LSM9DS1_MAGDATARATE_3_125HZ = (0b000 << 2),
@@ -172,17 +172,18 @@ typedef enum {
 	LSM9DS1_MAGDATARATE_25HZ = (0b011 << 2),
 	LSM9DS1_MAGDATARATE_50HZ = (0b100 << 2),
 	LSM9DS1_MAGDATARATE_100HZ = (0b101 << 2)
-} lsm9ds1MagDataRate_t;
+} lsm9ds1_mag_data_rate_t;
 
 typedef enum {
 	LSM9DS1_GYROSCALE_245DPS = (0b00 << 3), // +/- 245 degrees per second rotation
 	LSM9DS1_GYROSCALE_500DPS = (0b01 << 3), // +/- 500 degrees per second rotation
 	LSM9DS1_GYROSCALE_2000DPS = (0b11 << 3) // +/- 2000 degrees per second rotation
-} lsm9ds1GyroScale_t;
+} lsm9ds1_gyro_scale_t;
 
 typedef struct lsm9ds1_settings {
-	lsm9ds1AccelRange_t range;
-	lsm9ds1MagGain_t gain;
+	lsm9ds1_accel_range_t range;
+	lsm9ds1_mag_gain_t gain;
+	lsm9ds1_gyro_scale_t scale;
 }lsm9ds1_settings_t;
 
 //TODO Make better header comments.
@@ -215,15 +216,19 @@ lsm9ds1_status_t lsm9ds1_read_mag(mag_data_t *mag_data);
  *  @param range The accelerometer range.
  *  @return status
  */
-lsm9ds1_status_t lsm9ds1_init(lsm9ds1_bus_t bus_type, lsm9ds1AccelRange_t range, lsm9ds1MagGain_t gain);
+lsm9ds1_status_t lsm9ds1_init(lsm9ds1_bus_t bus_type,
+		lsm9ds1_accel_range_t range, lsm9ds1_mag_gain_t gain,
+		lsm9ds1_gyro_scale_t scale);
 
 /** @brief Setup the accelerometer.
  *  @param range The accelerometer range.
  *  @return status
  */
-lsm9ds1_status_t lsm9ds1_setup_accel(lsm9ds1AccelRange_t range);
+lsm9ds1_status_t lsm9ds1_setup_accel(lsm9ds1_accel_range_t range);
 
-lsm9ds1_status_t lsm9ds1_setup_mag(lsm9ds1MagGain_t gain);
+lsm9ds1_status_t lsm9ds1_setup_mag(lsm9ds1_mag_gain_t gain);
+
+lsm9ds1_status_t lsm9ds1_setup_gyro(lsm9ds1_gyro_scale_t scale);
 
 
 #ifdef __cplusplus
