@@ -127,6 +127,7 @@ int main(int argc, char* argv[]) {
 		lsm9ds1_status_t ret = LSM9DS1_UNKNOWN_ERROR;
 		ret = lsm9ds1_init(LSM9DS1_SPI_BUS, LSM9DS1_ACCELRANGE_8G,
 				LSM9DS1_MAGGAIN_8GAUSS, LSM9DS1_GYROSCALE_500DPS);
+		std::cout << "Init status:" << (int32_t) ret << std::endl;
 
 		boost::asio::io_service io_service;
 

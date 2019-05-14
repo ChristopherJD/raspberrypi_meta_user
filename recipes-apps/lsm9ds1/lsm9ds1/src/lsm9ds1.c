@@ -67,7 +67,7 @@ static lsm9ds1_status_t transfer(lsm9ds1_xfer_t op, uint8_t address, uint8_t tx,
 		addr_xfer = (SPI_READ | address);
 		break;
 	case LSM9DS1_WRITE:
-		tr[1].tx_buf = (unsigned long) tx;
+		tr[1].tx_buf = (unsigned long) &tx;
 		tr[1].len = sizeof(tx);
 		tr[1].speed_hz = speed;
 		tr[1].delay_usecs = delay;
@@ -91,8 +91,13 @@ static lsm9ds1_status_t transfer(lsm9ds1_xfer_t op, uint8_t address, uint8_t tx,
 	tr[0].bits_per_word = bits;
 
 	ret = ioctl(fd, SPI_IOC_MESSAGE(2), tr);
-
-	if (ret < 1) {
+#ifdef DEBUG
+	printf("SPIDEV: transfer(%d)\n", ret);
+	if(ret < 0) {
+		perror("SPIDEV transfer:");
+	}
+#endif
+	if(ret < 1) {
 		return LSM9DS1_SPI_BUS_XFER_ERROR;
 	}
 
@@ -245,7 +250,7 @@ lsm9ds1_status_t lsm9ds1_init(lsm9ds1_bus_t bus_type,
 	lsm9ds1_status_t ret = LSM9DS1_UNKNOWN_ERROR;
 
 	//reset number of calls if necessary
-	if(num_calls == UINT8_MAX) {
+	if (num_calls == UINT8_MAX) {
 		num_calls = 0;
 	}
 	num_calls++;
