@@ -23,6 +23,17 @@
  * THE SOFTWARE.
  */
 
+/**
+ * @file
+ * @author Christopher Jordan-Denny
+ * @date
+ * @brief Functions to access the lsm9ds1.
+ *
+ * Initializes the LSM9DS1 for the Raspberry Pi 3B+. Currently the device is wired
+ * to the first spi device. Sets up the magnetometer, accelerometer and gyroscope.
+ * Provides functions to read and write the data collected on the LSM9DS1.
+ */
+
 #ifndef LSM9DS1_H_
 #define LSM9DS1_H_
 
@@ -38,6 +49,9 @@ extern "C"
 #define SPI_READ 0x80
 #define SPI_WRITE 0x0
 
+/**
+ * @brief Temperature returned from the LSM9DS1
+ */
 typedef int16_t lsm9ds1_temperature_t;
 
 typedef struct accelerometer_data {
@@ -52,6 +66,10 @@ typedef struct mag_data {
 	int16_t z;
 }mag_data_t;
 
+/**
+ * @brief Contains the possible error codes returned by the functions.
+ *
+ */
 typedef enum lsm9ds1_status {
 	LSM9DS1_SUCCESS = 0,
 	LSM9DS1_NOT_FOUND = -1,
@@ -79,6 +97,13 @@ typedef enum lsm9ds1_bus_t {
 	LSM9DS1_SPI_BUS, LSM9DS1_I2C_BUS,
 } lsm9ds1_bus_t;
 
+/**
+ * @brief Sub device of the LSM9DS1
+ *
+ * The LSM9DS1 contains two sub-devices. The accelerometer gyroscope combo and
+ * the magnetometer. The value 0 is used as an uknown device.
+ *
+ */
 typedef enum {
 	LSM9DS1_UNKNOWN_DEVICE = 0,
 	LSM9DS1_ACCEL_GYRO = 0b01101000,
@@ -187,9 +212,40 @@ typedef struct lsm9ds1_settings {
 }lsm9ds1_settings_t;
 
 //TODO Make better header comments.
-/** @brief Determine which subdevice of the LSM9DS1 we are reading from. This can either be the gyroscope and accelerometer combo or a magnetometer.
- *  @param device_id The discovered device id. This is the value returned from the WHOAMI register.
- *  @return status
+
+/**
+/* @brief Determine which subdevice of the LSM9DS1 we are reading from.
+ *
+ * The sub-device can either be the gyroscope and accelerometer combo or a magnetometer.
+ * The WHO_AMI register on the LSM9DS1 is read to determine which device is found.
+ * The LSM9DS1 has two chip-selects, one for the gyroscope accelerometer combo and one,
+ * for the magnetometer. @p device_id returns the device found see \ref lsm9ds1_devices_t.
+ *
+ * Example Usage:
+ * @code
+ * #include <lsm9ds1.h>
+ *
+ * int main() {
+ * 		lsm9ds1_status_t status = LSM9DS1_UNKNOWN_ERROR;
+ * 		lsm9ds1_devices_t found_device = LSM9DS1_UNKNOWN_SUB_DEVICE;
+ *
+ *		status = lsm9ds1_init(LSM9DS1_SPI_BUS);
+ *		if(status < 0) {
+ *			fprinf(stderr, "Error initializing lsm9ds1!\n");
+ *		}
+ *
+ * 		status = lms9ds1_read_sub_device(found_device);
+ * 		if(status < 0) {
+ * 			fprintf(stderr, "Error getting sub-device!\n");
+ * 		}
+ * }
+ * @endcode
+ * @param device_id The discovered device id.
+ * @return Returns the function status.
+ * @see \ref lsm9ds1_status_t
+ * @see \ref lsm9ds1_devices_t
+ * @note You must first initialize the lsm9ds1.
+ * @see lsm9ds1_init
  */
 lsm9ds1_status_t lsm9ds1_read_sub_device(lsm9ds1_devices_t *device_id);
 
@@ -199,9 +255,36 @@ lsm9ds1_status_t lsm9ds1_read_sub_device(lsm9ds1_devices_t *device_id);
  */
 lsm9ds1_status_t lsm9ds1_read_accel(accelerometer_data_t *accel_data);
 
-/** @brief Read the temperature.
- *  @param temp The temperature read.
- *  @return status
+/**
+/* @brief Read the temperature from the LSM9DS1.
+ *
+ * TODO Add description of temp
+ *
+ * Example Usage:
+ * @code
+ * #include <lsm9ds1.h>
+ *
+ * int main() {
+ * 		lsm9ds1_status_t status = LSM9DS1_UNKNOWN_ERROR;
+ * 		lsm9ds1_temperature_t temp = 0;
+ *
+ *		status = lsm9ds1_init(LSM9DS1_SPI_BUS);
+ *		if(status < 0) {
+ *			fprinf(stderr, "Error initializing lsm9ds1!\n");
+ *		}
+ *
+ * 		status = lms9ds1_read_temp(temp);
+ * 		if(status < 0) {
+ * 			fprintf(stderr, "Error getting sub-device!\n");
+ * 		}
+ * }
+ * @endcode
+ * @param device_id The discovered device id.
+ * @return Returns the function status.
+ * @see \ref lsm9ds1_status_t
+ * @see \ref lsm9ds1_temperature_t
+ * @note You must first initialize the lsm9ds1.
+ * @see lsm9ds1_init
  */
 lsm9ds1_status_t lsm9ds1_read_temp(lsm9ds1_temperature_t *temp);
 
