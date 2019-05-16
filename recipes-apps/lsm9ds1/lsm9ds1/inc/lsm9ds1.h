@@ -214,7 +214,7 @@ typedef struct lsm9ds1_settings {
 //TODO Make better header comments.
 
 /**
-/* @brief Determine which subdevice of the LSM9DS1 we are reading from.
+ * @brief Determine which subdevice of the LSM9DS1 we are reading from.
  *
  * The sub-device can either be the gyroscope and accelerometer combo or a magnetometer.
  * The WHO_AMI register on the LSM9DS1 is read to determine which device is found.
@@ -256,7 +256,7 @@ lsm9ds1_status_t lsm9ds1_read_sub_device(lsm9ds1_devices_t *device_id);
 lsm9ds1_status_t lsm9ds1_read_accel(accelerometer_data_t *accel_data);
 
 /**
-/* @brief Read the temperature from the LSM9DS1.
+ * @brief Read the temperature from the LSM9DS1.
  *
  * TODO Add description of temp
  *

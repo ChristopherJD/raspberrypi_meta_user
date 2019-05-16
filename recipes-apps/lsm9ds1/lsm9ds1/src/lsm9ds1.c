@@ -104,19 +104,6 @@ static lsm9ds1_status_t transfer(lsm9ds1_xfer_t op, uint8_t address, uint8_t tx,
 	return LSM9DS1_SUCCESS;
 }
 
-//TODO Decide if function is necessary
-static lsm9ds1_status_t get_spi_mode() {
-
-	int8_t ret = -1;	// Function return codes.
-
-	ret = ioctl(fd, SPI_IOC_RD_MODE, &mode);
-	if (ret == -1) {
-		return LSM9DS1_UNABLE_TO_GET_SPI_MODE;
-	}
-
-	return LSM9DS1_SUCCESS;
-}
-
 static lsm9ds1_status_t init_spi(void) {
 
 	int8_t ret = -1;	// Function return codes.
@@ -180,8 +167,9 @@ lsm9ds1_status_t lsm9ds1_read_sub_device(lsm9ds1_devices_t *device_id) {
 	uint8_t read_buffer = LSM9DS1_UNKNOWN_DEVICE;
 	*device_id = LSM9DS1_UNKNOWN_DEVICE;
 
-	// The mag accel and gyro id should be at the same offset, if not, we don't know what device we have
-	if (!(LSM9DS1_REGISTER_WHO_AM_I_XG == LSM9DS1_REGISTER_WHO_AM_I_M)) {
+	// The mag accel and gyro id should be at the same offset, if not, we don't know what device we have.
+	// We are comparing enums of different types, cast first since we want to do this.
+	if (!((int)LSM9DS1_REGISTER_WHO_AM_I_XG == (int)LSM9DS1_REGISTER_WHO_AM_I_M)) {
 		return LSM9DS1_UNKNOWN_SUB_DEVICE;
 	}
 
