@@ -51,12 +51,3 @@ recipes-apps/spi_loop_back/spidev_test/src/Makefile.in
 recipes-apps/spi_loop_back/spidev_test/src/spidev_test
 recipes-apps/spi_loop_back/spidev_test/stamp-h1
 
-# LSM9DS1 Project ignores
-recipes-apps/lsm9ds1/lsm9ds1/Debug/
-recipes-apps/lsm9ds1/lsm9ds1/Release/
-recipes-apps/lsm9ds1/lsm9ds1/toolchain.cmake
-recipes-apps/lsm9ds1/lsm9ds1_server/Debug/
-recipes-apps/lsm9ds1/lsm9ds1_server/toolchain.cmake
-recipes-apps/lsm9ds1/lsm9ds1_client/Debug/
-recipes-apps/lsm9ds1/lsm9ds1_client/toolchain.cmake
-
