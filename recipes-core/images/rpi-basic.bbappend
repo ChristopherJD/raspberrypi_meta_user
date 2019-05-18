@@ -1,4 +1,5 @@
 IMAGE_INSTALL += " network-conf"
 IMAGE_INSTALL += " ssh-conf"
 IMAGE_INSTALL += " hello-world"
-IMAGE_INSTALL += " thrift"
+IMAGE_INSTALL += " python3-flask"
+IMAGE_INSTALL += " python3-unittest"

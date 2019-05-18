@@ -30,6 +30,7 @@ set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -Wall -pedantic")
 
 ######## Build and include settings ########
 include_directories(
+	/opt/poky/2.6.2/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi/usr/include/python3.5m
 	inc
 )
 
@@ -39,15 +40,24 @@ link_directories(
 
 
 file(GLOB SOURCES
-	"src/*.c"
+	"src/lsm9ds1.c"
+)
+
+file(GLOB PYTHON_EXTENSION_SOURCES
+	"src/lsm9ds1_wrap.c"
+	"src/lsm9ds1.c"
 )
 
 #Generate the shared library from the sources
 add_library(lsm9ds1 SHARED ${SOURCES})
+add_library(pylsm9ds1 SHARED ${PYTHON_EXTENSION_SOURCES})
 
 ######## Install targets ########
 INSTALL(TARGETS lsm9ds1
 	DESTINATION usr/lib/
 )
 
-
+SET_TARGET_PROPERTIES(pylsm9ds1 PROPERTIES PREFIX "")
+INSTALL(TARGETS pylsm9ds1
+	DESTINATION usr/lib/python3.5/site-packages
+)
