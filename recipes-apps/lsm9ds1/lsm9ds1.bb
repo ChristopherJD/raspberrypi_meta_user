@@ -18,13 +18,13 @@ PROVIDES = "lsm9ds1"
 DEPENDS += "python3"
 DEPENDS += "cunit"
 
-FILES_${PN} += "${libdir}/python3.5/site-packages/pylsm9ds1.so"
+FILES_${PN} += "${libdir}/python3.5/site-packages/"
 
 # https://lists.yoctoproject.org/pipermail/yocto/2014-July/020408.html
 # https://wiki.yoctoproject.org/wiki/TipsAndTricks/Packaging_Prebuilt_Libraries
 # I think we need to version the library to remove this statement.
 FILES_SOLIBSDEV = ""
-FILES_${PN} += "${libdir}/liblsm9ds1.so"
+FILES_${PN} += "${libdir}"
 
 
 SRCREV = "${AUTOREV}"
