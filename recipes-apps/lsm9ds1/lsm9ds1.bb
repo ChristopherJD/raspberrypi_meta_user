@@ -11,21 +11,33 @@
 # recipe for anything other than initial testing/development!
 LICENSE = "CLOSED"
 LIC_FILES_CHKSUM = ""
+
+
 PROVIDES = "lsm9ds1"
 
 DEPENDS += "python3"
 DEPENDS += "cunit"
 
-inherit pkgconfig cmake
+FILES_${PN} += "${libdir}/python3.5/site-packages/pylsm9ds1.so"
 
-FILES_${PN} += "${libdir}"
+# https://lists.yoctoproject.org/pipermail/yocto/2014-July/020408.html
+# https://wiki.yoctoproject.org/wiki/TipsAndTricks/Packaging_Prebuilt_Libraries
+# I think we need to version the library to remove this statement.
+FILES_SOLIBSDEV = ""
+FILES_${PN} += "${libdir}/liblsm9ds1.so"
+
 
 SRCREV = "${AUTOREV}"
 SRC_URI = "git://github.com/ChristopherJD/lsm9ds1.git;protocol=ssh;user=git;branch=master"
 
 S = "${WORKDIR}/git"
 
+inherit pkgconfig cmake
+
 do_install () {
 	install -d ${D}${libdir}
+	install -d ${D}${libdir}/python3.5/site-packages
+	install -m 0755 liblsm9ds1.so ${D}${libdir}
+	install -m 0755 pylsm9ds1.so ${D}${libdir}/python3.5/site-packages
 }
 
