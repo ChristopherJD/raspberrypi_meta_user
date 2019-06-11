@@ -17,6 +17,7 @@ PROVIDES = "lsm9ds1"
 
 DEPENDS += "python3"
 DEPENDS += "cunit"
+DEPENDS += "wiringpi"
 
 FILES_${PN} += "${libdir}/python3.5/site-packages/"
 
