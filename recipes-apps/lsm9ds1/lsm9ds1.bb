@@ -37,8 +37,6 @@ inherit pkgconfig cmake
 
 do_install () {
 	install -d ${D}${libdir}
-	install -d ${D}${libdir}/python3.5/site-packages
 	install -m 0755 liblsm9ds1.so ${D}${libdir}
-	install -m 0755 pylsm9ds1.so ${D}${libdir}/python3.5/site-packages
 }
 
