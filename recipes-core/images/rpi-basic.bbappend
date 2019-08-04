@@ -6,7 +6,20 @@ IMAGE_INSTALL += " python3-unittest"
 IMAGE_INSTALL += " python3-dev"
 IMAGE_INSTALL += " cunit"
 IMAGE_INSTALL += " wiringpi"
-IMAGE_INSTALL += " lsm9ds1"
-IMAGE_INSTALL += " cjson"
 IMAGE_INSTALL += " served"
-IMAGE_INSTALL += " nlohmann_json"
+IMAGE_INSTALL += " vim"
+#IMAGE_INSTALL += " nlohmann-json"
+
+# LSM9DS1 Required
+IMAGE_INSTALL += " cjson"
+IMAGE_INSTALL += " lsm9ds1"
+
+# GPS and Timing
+IMAGE_INSTALL += " gpsd"
+IMAGE_INSTALL += " gps-utils"
+IMAGE_INSTALL += " gpsd-systemd"
+IMAGE_INSTALL += " libgps"
+IMAGE_INSTALL += " python-pygps"
+IMAGE_INSTALL += " pps-tools"
+IMAGE_INSTALL += " ntp"
+
