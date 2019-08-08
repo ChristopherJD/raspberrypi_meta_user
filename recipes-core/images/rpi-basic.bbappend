@@ -22,4 +22,5 @@ IMAGE_INSTALL += " libgps"
 IMAGE_INSTALL += " python-pygps"
 IMAGE_INSTALL += " pps-tools"
 IMAGE_INSTALL += " ntp"
+IMAGE_INSTALL += " ntp-utils"
 
