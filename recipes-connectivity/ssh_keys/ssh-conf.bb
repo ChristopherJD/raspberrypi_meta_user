@@ -13,7 +13,7 @@ LICENSE = "CLOSED"
 LIC_FILES_CHKSUM = ""
 
 # No information for SRC_URI yet (only an external source tree was specified)
-SRC_URI = "file://id_rsa.pub"
+SRC_URI = "file://authorized_keys"
 PROVIDES = "ssh-conf"
 FILES_${PN} += "/home/root/.ssh/*"
 
@@ -32,6 +32,6 @@ do_compile () {
 do_install () {
 	# Specify install commands here
 	#
-	install -D ${WORKDIR}/id_rsa.pub ${D}/${ROOT_HOME}/.ssh/id_rsa.pub
+	install -D ${WORKDIR}/authorized_keys ${D}/${ROOT_HOME}/.ssh/authorized_keys
 }
 

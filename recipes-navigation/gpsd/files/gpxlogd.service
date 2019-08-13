@@ -1,0 +1,12 @@
+[Unit]
+Description=GPS Logging service
+After=gpsd.service
+
+[Service]
+Type=simple
+User=root
+ExecStart=/usr/bin/gpxlogger -f /var/log/gps.xml
+
+[Install]
+WantedBy=multi-user.target
+

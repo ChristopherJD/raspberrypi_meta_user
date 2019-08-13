@@ -23,4 +23,5 @@ IMAGE_INSTALL += " python-pygps"
 IMAGE_INSTALL += " pps-tools"
 IMAGE_INSTALL += " ntp"
 IMAGE_INSTALL += " ntp-utils"
+IMAGE_INSTALL += " logrotate"
 

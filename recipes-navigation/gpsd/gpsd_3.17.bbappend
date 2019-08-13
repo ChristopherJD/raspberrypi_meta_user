@@ -16,15 +16,26 @@
 # No information for SRC_URI yet (only an external source tree was specified)
 #DEPENDS += "gpsd"
 #FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
-#
-FILES_${PN} += "${SYSCONFDIR}/default/"
+
+FILES_${PN} += " ${sysconfdir}/default \
+	${systemd_system_unitdir} \
+"
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
-SRC_URI_append = "file://gpsd.default"
+SRC_URI_append = "\
+	file://gpsd.default \
+	file://gpxlogd.service \
+"
+
+SYSTEMD_SERVICE_${PN} = "gpxlogd.service"
+
 
 do_install_append () {
 	# Overwrite the configuration.
 	#
 	install -d "${D}/etc/default"
 	install -D ${WORKDIR}/gpsd.default "${D}/etc/default/gpsd.default"
+
+	install -d ${D}/${systemd_system_unitdir}
+        install -m 0644 ${WORKDIR}/gpxlogd.service ${D}/${systemd_system_unitdir}
 }
 
