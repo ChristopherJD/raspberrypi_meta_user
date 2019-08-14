@@ -26,6 +26,7 @@ SRC_URI_append = "\
 	file://gpxlogd.service \
 "
 
+SYSTEMD_SERVICE_${PN} = "gpsd.service"
 SYSTEMD_SERVICE_${PN} = "gpxlogd.service"
 
 

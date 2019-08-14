@@ -5,7 +5,7 @@ After=gpsd.service
 [Service]
 Type=simple
 User=root
-ExecStart=/usr/bin/gpxlogger -f /var/log/gps.xml
+ExecStart=/usr/bin/gpxlogger -f /var/log/gps.xml localhost:2947
 
 [Install]
 WantedBy=multi-user.target
