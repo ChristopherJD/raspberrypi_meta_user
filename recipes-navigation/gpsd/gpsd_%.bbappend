@@ -24,6 +24,7 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 SRC_URI_append = "\
 	file://gpsd.default \
 	file://gpslogd.service \
+	file://0001-Handle-SIGHUP-for-daemon-reloads.patch \
 "
 
 SYSTEMD_SERVICE_${PN} = "gpsd.service"
