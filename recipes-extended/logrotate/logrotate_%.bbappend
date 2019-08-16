@@ -17,26 +17,26 @@
 #DEPENDS += "gpsd"
 #FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
-FILES_${PN} += " ${sysconfdir}/default \
-	${systemd_system_unitdir} \
+FILES_${PN} += " ${sysconfdir}/logrotate.d/ \
+${systemd_system_unitdir} \
 "
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 SRC_URI_append = "\
-	file://gpsd.default \
-	file://gpslogd.service \
+	file://gpslogd \
+	file://logrotate.service \
+	file://logrotate.timer \
 "
 
-SYSTEMD_SERVICE_${PN} = "gpsd.service"
-SYSTEMD_SERVICE_${PN} = "gpslogd.service"
-
+SYSTEMD_SERVICE_${PN} = "logrotate.timer"
 
 do_install_append () {
 	# Overwrite the configuration.
 	#
-	install -d "${D}/etc/default"
-	install -D ${WORKDIR}/gpsd.default "${D}/etc/default/gpsd.default"
+	install -d "${D}/${sysconfdir}/logrotate.d/"
+	install -D ${WORKDIR}/gpslogd "${D}/etc/logrotate.d/gpslogd"
 
 	install -d ${D}/${systemd_system_unitdir}
-    install -m 0644 ${WORKDIR}/gpslogd.service ${D}/${systemd_system_unitdir}
+    install -m 0644 ${WORKDIR}/logrotate.service ${D}/${systemd_system_unitdir}
+    install -m 0644 ${WORKDIR}/logrotate.timer ${D}/${systemd_system_unitdir}
 }
 

@@ -1,0 +1,17 @@
+[Unit]
+Description=GPS Logging service
+After=gpsd.service
+StartLimitInterval=200
+StartLimitBurst=5
+
+[Service]
+Type=simple
+User=root
+ExecStart=/usr/bin/gpspipe -l -w -o /var/log/gps.json localhost:2947
+ExecReload=kill -HUP $MAINPID
+Restart=always
+RestartSec=20
+
+[Install]
+WantedBy=multi-user.target
+

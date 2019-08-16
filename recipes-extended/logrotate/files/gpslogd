@@ -1,0 +1,9 @@
+/var/log/gps.json {
+    size 100M
+    missingok
+    rotate 10
+    compress
+    postrotate
+        systemctl reload gpslogd
+    endscript
+}
