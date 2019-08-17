@@ -19,12 +19,14 @@
 
 FILES_${PN} += " ${sysconfdir}/logrotate.d/ \
 ${systemd_system_unitdir} \
+${sysconfdir} \
 "
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 SRC_URI_append = "\
 	file://gpslogd \
 	file://logrotate.service \
 	file://logrotate.timer \
+	file://logrotate.conf \
 "
 
 SYSTEMD_SERVICE_${PN} = "logrotate.timer"
@@ -34,6 +36,7 @@ do_install_append () {
 	#
 	install -d "${D}/${sysconfdir}/logrotate.d/"
 	install -D ${WORKDIR}/gpslogd "${D}/etc/logrotate.d/gpslogd"
+	install -D ${WORKDIR}/logrotate.conf "${D}/etc/logrotate.conf"
 
 	install -d ${D}/${systemd_system_unitdir}
     install -m 0644 ${WORKDIR}/logrotate.service ${D}/${systemd_system_unitdir}
