@@ -7,7 +7,7 @@ StartLimitBurst=5
 [Service]
 Type=simple
 User=root
-ExecStart=/usr/bin/gpspipe -l -w -o /var/log/gps.json localhost:2947
+ExecStart=/usr/bin/gpslogger.sh
 ExecReload=kill -HUP $MAINPID
 Restart=always
 RestartSec=20

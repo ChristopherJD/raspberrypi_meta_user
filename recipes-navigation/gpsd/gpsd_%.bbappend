@@ -25,6 +25,7 @@ SRC_URI_append = "\
 	file://gpsd.default \
 	file://gpslogd.service \
 	file://0001-Handle-SIGHUP-for-daemon-reloads.patch \
+    file://gpslogger.sh \
 "
 
 SYSTEMD_SERVICE_${PN} = "gpsd.service"
@@ -36,6 +37,9 @@ do_install_append () {
 	#
 	install -d "${D}/etc/default"
 	install -D ${WORKDIR}/gpsd.default "${D}/etc/default/gpsd.default"
+
+	install -d "${D}${bindir}"
+	install -D ${WORKDIR}/gpslogger.sh "${D}${bindir}"
 
 	install -d ${D}/${systemd_system_unitdir}
     install -m 0644 ${WORKDIR}/gpslogd.service ${D}/${systemd_system_unitdir}
