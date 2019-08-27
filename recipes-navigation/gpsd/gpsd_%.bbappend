@@ -19,6 +19,7 @@
 
 FILES_${PN} += " ${sysconfdir}/default \
 	${systemd_system_unitdir} \
+	${bindir} \
 "
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 SRC_URI_append = "\
@@ -28,6 +29,7 @@ SRC_URI_append = "\
     file://gpslogger.sh \
 "
 
+RDEPENDS_${PN} = "bash"
 SYSTEMD_SERVICE_${PN} = "gpsd.service"
 SYSTEMD_SERVICE_${PN} = "gpslogd.service"
 

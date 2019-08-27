@@ -9,6 +9,7 @@ IMAGE_INSTALL += " wiringpi"
 IMAGE_INSTALL += " served"
 IMAGE_INSTALL += " vim"
 #IMAGE_INSTALL += " nlohmann-json"
+IMAGE_INSTALL += " valgrind"
 
 # LSM9DS1 Required
 IMAGE_INSTALL += " cjson"

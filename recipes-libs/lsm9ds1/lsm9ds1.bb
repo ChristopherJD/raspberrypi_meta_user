@@ -15,11 +15,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1ebbd3e34237af26da5dc08a4e440464"
 
 PROVIDES = "lsm9ds1"
 
-DEPENDS += "python3"
 DEPENDS += "cunit"
 DEPENDS += "cjson"
-
-FILES_${PN} += "${libdir}/python3.5/site-packages/"
 
 # https://lists.yoctoproject.org/pipermail/yocto/2014-July/020408.html
 # https://wiki.yoctoproject.org/wiki/TipsAndTricks/Packaging_Prebuilt_Libraries
