@@ -21,9 +21,9 @@ DEPENDS += "cjson"
 # https://lists.yoctoproject.org/pipermail/yocto/2014-July/020408.html
 # https://wiki.yoctoproject.org/wiki/TipsAndTricks/Packaging_Prebuilt_Libraries
 # I think we need to version the library to remove this statement.
-FILES_SOLIBSDEV = ""
-FILES_${PN} += "${libdir}"
-
+FILES_${PN} += "${libdir}/*"
+FILES_${PN} += "/usr/share/*"
+FILES_${PN} += "${bindir}/*"
 
 SRCREV = "${AUTOREV}"
 SRC_URI = "git://github.com/ChristopherJD/lsm9ds1.git;protocol=ssh;user=git;branch=master"
@@ -31,9 +31,4 @@ SRC_URI = "git://github.com/ChristopherJD/lsm9ds1.git;protocol=ssh;user=git;bran
 S = "${WORKDIR}/git"
 
 inherit pkgconfig cmake
-
-do_install () {
-	install -d ${D}${libdir}
-	install -m 0755 liblsm9ds1.so ${D}${libdir}
-}
 
