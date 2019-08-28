@@ -21,9 +21,11 @@ DEPENDS += "cjson"
 # https://lists.yoctoproject.org/pipermail/yocto/2014-July/020408.html
 # https://wiki.yoctoproject.org/wiki/TipsAndTricks/Packaging_Prebuilt_Libraries
 # I think we need to version the library to remove this statement.
-FILES_${PN} += "${libdir}/*"
+FILES_${PN} += "${libdir}"
+FILES_${PN} += "${bindir}"
 FILES_${PN} += "/usr/share/*"
-FILES_${PN} += "${bindir}/*"
+FILES_${PN}-dev += "${libdir}/*"
+FILES_${PN}-dev += "${includedir}/*"
 
 SRCREV = "${AUTOREV}"
 SRC_URI = "git://github.com/ChristopherJD/lsm9ds1.git;protocol=ssh;user=git;branch=master"
