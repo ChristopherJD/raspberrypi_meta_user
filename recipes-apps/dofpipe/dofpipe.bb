@@ -16,7 +16,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1ebbd3e34237af26da5dc08a4e440464"
 PROVIDES = "dofpipe"
 
 DEPENDS += "cjson"
-DEPENDS += "liblsm9ds1"
+DEPENDS += "lsm9ds1"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 SRC_URI_append = "\
@@ -27,8 +27,9 @@ SRC_URI_append = "\
 # https://lists.yoctoproject.org/pipermail/yocto/2014-July/020408.html
 # https://wiki.yoctoproject.org/wiki/TipsAndTricks/Packaging_Prebuilt_Libraries
 # I think we need to version the library to remove this statement.
-#FILES_${PN} += "${systemd_system_unitdir}"
-FILES_${PN} += "lib/systemd/system"
+
+systemd_system_unitdir = "/lib/systemd/system/"
+FILES_${PN} += "${systemd_system_unitdir}"
 FILES_${PN} += "${bindir}"
 FILES_${PN} += "/usr/share/man/man8*"
 
@@ -36,13 +37,11 @@ RDEPENDS_${PN} = "bash"
 SYSTEMD_SERVICE_${PN} = "doflogd.service"
 
 SRCREV = "${AUTOREV}"
-SRC_URI = "git://github.com/ChristopherJD/dofpipe.git;protocol=ssh;user=git;branch=master"
+SRC_URI = "git://github.com/ChristopherJD/dofpipe.git;protocol=http;branch=master"
 
 S = "${WORKDIR}/git"
 
 do_install_append () {
-	# Overwrite the configuration.
-	#
 	install -d "${D}/${bindir}"
 	install -D ${WORKDIR}/doflogger.sh "${D}/${bindir}"
 

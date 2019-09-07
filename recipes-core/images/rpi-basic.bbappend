@@ -13,7 +13,7 @@ IMAGE_INSTALL += " valgrind"
 
 # LSM9DS1 Required
 IMAGE_INSTALL += " cjson"
-IMAGE_INSTALL += " liblsm9ds1"
+IMAGE_INSTALL += " lsm9ds1"
 IMAGE_INSTALL += " dofpipe"
 
 # GPS and Timing
