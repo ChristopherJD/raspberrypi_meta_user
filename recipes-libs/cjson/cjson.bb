@@ -15,7 +15,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=218947f77e8cb8e2fa02918dc41c50d0"
 PROVIDES = "cjson"
 
 SRCREV = "${AUTOREV}"
-SRC_URI = "git://github.com/DaveGamble/cJSON.git;protocol=ssh;user=git;branch=master"
+SRC_URI = "git://github.com/DaveGamble/cJSON.git;protocol=http;branch=master"
 
 S = "${WORKDIR}/git"
 

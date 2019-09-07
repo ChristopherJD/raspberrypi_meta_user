@@ -17,7 +17,7 @@ DEPENDS += "boost"
 PROVIDES = "served"
 
 SRCREV = "${AUTOREV}"
-SRC_URI = "git://github.com/meltwater/served.git;protocol=ssh;user=git;branch=master"
+SRC_URI = "git://github.com/meltwater/served.git;protocol=http;branch=master"
 
 S = "${WORKDIR}/git"
 

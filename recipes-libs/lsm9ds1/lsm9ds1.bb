@@ -27,7 +27,7 @@ FILES_${PN} += "/usr/share/*"
 FILES_${PN} += "${includedir}/*"
 
 SRCREV = "${AUTOREV}"
-SRC_URI = "git://github.com/ChristopherJD/lsm9ds1.git;protocol=ssh;user=git;branch=master"
+SRC_URI = "git://github.com/ChristopherJD/lsm9ds1.git;protocol=http;branch=master"
 
 S = "${WORKDIR}/git"
 
