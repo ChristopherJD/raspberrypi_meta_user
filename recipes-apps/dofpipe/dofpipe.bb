@@ -28,7 +28,6 @@ SRC_URI_append = "\
 # https://wiki.yoctoproject.org/wiki/TipsAndTricks/Packaging_Prebuilt_Libraries
 # I think we need to version the library to remove this statement.
 
-systemd_system_unitdir = "/lib/systemd/system/"
 FILES_${PN} += "${systemd_system_unitdir}"
 FILES_${PN} += "${bindir}"
 FILES_${PN} += "/usr/share/man/man8*"
@@ -45,8 +44,12 @@ do_install_append () {
 	install -d "${D}/${bindir}"
 	install -D ${WORKDIR}/doflogger.sh "${D}/${bindir}"
 
+	# Remove Previous systemd file installed from package.
+	rm -rf "${D}/usr/lib"
+
+	# Install the new systemd service file.
 	install -d "${D}/${systemd_system_unitdir}"
-    install -m 0644 ${WORKDIR}/doflogd.service ${D}/${systemd_system_unitdir}
+    	install -m 0644 ${WORKDIR}/doflogd.service ${D}/${systemd_system_unitdir}
 }
 
 inherit pkgconfig cmake
