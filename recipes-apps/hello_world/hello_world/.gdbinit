@@ -1,1 +1,0 @@
-set sysroot /opt/yocto_sdk/sysroots
