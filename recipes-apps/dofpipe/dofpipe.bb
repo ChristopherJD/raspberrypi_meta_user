@@ -33,6 +33,8 @@ FILES_${PN} += "${bindir}"
 FILES_${PN} += "/usr/share/man/man8*"
 
 RDEPENDS_${PN} = "bash"
+
+inherit systemd
 SYSTEMD_SERVICE_${PN} = "doflogd.service"
 
 SRCREV = "${AUTOREV}"
