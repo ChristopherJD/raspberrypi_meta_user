@@ -1,0 +1,25 @@
+From ea92352539037c02e4ed2f16bb72f096e501a272 Mon Sep 17 00:00:00 2001
+From: ChristopherJD <jordan.denny5@gmail.com>
+Date: Sun, 15 Sep 2019 22:15:10 -0500
+Subject: [PATCH 2/2] gawk5 support
+
+---
+ lang/cl/mkerrcodes.awk | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/lang/cl/mkerrcodes.awk b/lang/cl/mkerrcodes.awk
+index ae29043..9a1fc18 100644
+--- a/lang/cl/mkerrcodes.awk
++++ b/lang/cl/mkerrcodes.awk
+@@ -122,7 +122,7 @@ header {
+ }
+ 
+ !header {
+-  sub (/\#.+/, "");
++  sub (/#.+/, "");
+   sub (/[ 	]+$/, ""); # Strip trailing space and tab characters.
+ 
+   if (/^$/)
+-- 
+2.23.0
+
