@@ -23,7 +23,7 @@ DEPENDS += "cjson"
 # I think we need to version the library to remove this statement.
 FILES_${PN} += "${libdir}"
 FILES_${PN} += "${bindir}"
-FILES_${PN} += "/usr/share/*"
+FILES_${PN} += "/usr/etc/*"
 FILES_${PN} += "${includedir}/*"
 
 SRCREV = "${AUTOREV}"
