@@ -23,7 +23,8 @@ RDEPENDS_packagegroup-nav = "\
     pps-tools \
     ntp \
     ntp-utils \
-    logrotate"
+    logrotate \
+    mt3339-utils"
 
 RDEPENDS_packagegroup-dbg = "\
     vim \
