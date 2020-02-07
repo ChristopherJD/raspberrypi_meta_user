@@ -29,7 +29,8 @@ SRC_URI_append = "\
     file://gpslogger.sh \
 "
 
-RDEPENDS_${PN} = "bash"
+#RDEPENDS_${PN} = "bash"
+RDEPENDS_gps-utils = "bash"
 SYSTEMD_SERVICE_${PN} = "gpsd.service"
 SYSTEMD_SERVICE_${PN} = "gpslogd.service"
 

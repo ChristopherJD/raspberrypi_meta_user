@@ -1,4 +1,4 @@
-From 7b606ec0b8b0ffebf30b8478a16e812798039cc6 Mon Sep 17 00:00:00 2001
+From 13af06f92ff60d74e4a271c413aeed15ad119d2c Mon Sep 17 00:00:00 2001
 From: Christopher Jordan-Denny <jordan.denny5@gmail.com>
 Date: Fri, 16 Aug 2019 00:41:54 -0500
 Subject: [PATCH] Handle SIGHUP for daemon reloads.
@@ -8,10 +8,10 @@ Subject: [PATCH] Handle SIGHUP for daemon reloads.
  1 file changed, 19 insertions(+), 2 deletions(-)
 
 diff --git a/gpspipe.c b/gpspipe.c
-index 72eed30..abf2a9d 100644
+index 6c375bc..4acaa79 100644
 --- a/gpspipe.c
 +++ b/gpspipe.c
-@@ -60,6 +60,9 @@
+@@ -54,6 +54,9 @@
  #include "gpsdclient.h"
  #include "revision.h"
  
@@ -21,7 +21,7 @@ index 72eed30..abf2a9d 100644
  static struct gps_data_t gpsdata;
  static void spinner(unsigned int, unsigned int);
  
-@@ -134,6 +137,19 @@ static void usage(void)
+@@ -132,6 +135,19 @@ static void usage(void)
  		  "You must use -o if you use -d.\n");
  }
  
@@ -41,8 +41,8 @@ index 72eed30..abf2a9d 100644
  int main(int argc, char **argv)
  {
      char buf[4096];
-@@ -151,13 +167,11 @@ int main(int argc, char **argv)
-     long count = -1;
+@@ -152,13 +168,11 @@ int main(int argc, char **argv)
+     time_t exit_timer = 0;
      int option;
      unsigned int vflag = 0, l = 0;
 -    FILE *fp;
@@ -54,8 +54,8 @@ index 72eed30..abf2a9d 100644
 -    char *outfile = NULL;
  
      flags = WATCH_ENABLE;
-     while ((option = getopt(argc, argv, "?dD:lhrRwStT:vVn:s:o:pPu2")) != -1) {
-@@ -289,6 +303,9 @@ int main(int argc, char **argv)
+     while ((option = getopt(argc, argv,
+@@ -299,6 +313,9 @@ int main(int argc, char **argv)
  	}
      }
  
@@ -65,6 +65,3 @@ index 72eed30..abf2a9d 100644
      /* Open the serial port and set it up. */
      if (serialport)
  	open_serial(serialport);
--- 
-2.20.1
-
