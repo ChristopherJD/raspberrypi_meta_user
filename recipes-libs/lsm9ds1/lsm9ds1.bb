@@ -17,6 +17,7 @@ PROVIDES = "lsm9ds1"
 
 DEPENDS += "cunit"
 DEPENDS += "cjson"
+DEPENDS += "bcm2835"
 
 # https://lists.yoctoproject.org/pipermail/yocto/2014-July/020408.html
 # https://wiki.yoctoproject.org/wiki/TipsAndTricks/Packaging_Prebuilt_Libraries
